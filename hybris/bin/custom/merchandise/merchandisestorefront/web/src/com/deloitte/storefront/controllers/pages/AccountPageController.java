@@ -10,6 +10,7 @@
  */
 package com.deloitte.storefront.controllers.pages;
 
+import de.hybris.merchandise.facades.order.data.OrderCancelResultData;
 import de.hybris.platform.acceleratorfacades.ordergridform.OrderGridFormFacade;
 import de.hybris.platform.acceleratorfacades.product.data.ReadOnlyOrderGridData;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
@@ -55,6 +56,8 @@ import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
+
+import com.deloitte.facades.order.OrderCancelFacade;
 import com.deloitte.storefront.controllers.ControllerConstants;
 
 import java.util.Arrays;
@@ -70,6 +73,7 @@ import javax.annotation.Resource;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -114,6 +118,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String REDIRECT_TO_PASSWORD_UPDATE_PAGE = REDIRECT_PREFIX + "/my-account/update-password";
 	private static final String REDIRECT_TO_ORDER_HISTORY_PAGE = REDIRECT_PREFIX + "/my-account/orders";
 
+	private static final String REDIRECT_TO_ORDERS = REDIRECT_PREFIX + "/my-account/orders";
 	/**
 	 * We use this suffix pattern because of an issue with Spring 3.1 where a Uri value is incorrectly extracted if it
 	 * contains on or more '.' characters. Please see https://jira.springsource.org/browse/SPR-6164 for a discussion on
@@ -136,6 +141,9 @@ public class AccountPageController extends AbstractSearchPageController
 
 	private static final Logger LOG = Logger.getLogger(AccountPageController.class);
 
+	@Autowired
+	OrderCancelFacade merchandiseOrderFacade;
+	
 	@Resource(name = "orderFacade")
 	private OrderFacade orderFacade;
 
@@ -901,5 +909,29 @@ public class AccountPageController extends AbstractSearchPageController
 		GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
 				"text.account.profile.paymentCart.removed");
 		return REDIRECT_TO_PAYMENT_INFO_PAGE;
+	}
+	
+	@RequestMapping(value = "/cancelOrder/{orderCode}", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String orderCancel(@PathVariable("orderCode") final String orderCode, final RedirectAttributes redirectAttributes)
+
+	{
+
+		final OrderCancelResultData cancelResult = merchandiseOrderFacade.cancelOrder(orderCode);
+		redirectAttributes.addFlashAttribute("orderCancelResult", cancelResult);
+
+		return REDIRECT_TO_ORDERS;
+	}
+
+	@RequestMapping(value = "/cancelOrder/{orderCode}", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String orderCancelV2(@PathVariable("orderCode") final String orderCode, final RedirectAttributes redirectAttributes)
+
+	{
+
+		final OrderCancelResultData cancelResult = merchandiseOrderFacade.cancelOrder(orderCode);
+		redirectAttributes.addFlashAttribute("orderCancelResult", cancelResult);
+
+		return REDIRECT_TO_ORDERS;
 	}
 }

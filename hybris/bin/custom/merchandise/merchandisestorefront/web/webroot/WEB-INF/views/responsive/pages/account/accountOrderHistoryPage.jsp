@@ -7,6 +7,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="pagination" tagdir="/WEB-INF/tags/responsive/nav/pagination" %>
+<%@ taglib prefix="action" tagdir="/WEB-INF/tags/responsive/action" %>
 
 
 <spring:url value="/my-account/order/" var="orderDetailsUrl"/>
@@ -63,7 +64,7 @@
 								
 									 <c:set var="cancellable" value="${order.cancellable}" scope="request" />
 			                        <c:set var="orderCode" value="${order.code}" scope="request"/>
-			                        <c:set var="actionUrl" value="order/cancel/${order.code}" scope="request"/>
+			                        <c:set var="actionUrl" value="cancelOrder/${order.code}" scope="request"/>
 			                        <action:actions element="div" parentComponent="${component}"/>
 								</td>
 							</ycommerce:testId>
