@@ -6,12 +6,16 @@
     <extension name='commerceservicesbackoffice' />
     <extension name='solrfacetsearchbackoffice' />
     <extension name='solrserver' />
-    <!-- <extension name='yacceleratorcockpits' />
+   
+
+ <!-- <extension name='yacceleratorcockpits' />
     <extension name='yacceleratorinitialdata' />
     <extension name='yacceleratorfulfilmentprocess' />
-    <extension name='yacceleratorstorefront' />
+    <extension name='yacceleratorstorefront' /> 
+
+
     <extension name='ycommercewebservices' />
-    <extension name='ycommercewebservicestest' /> -->
+    <extension name='ycommercewebservicestest' />-->
     <extension name='electronicsstore' />
     <extension name='apparelstore' />
     <extension name='liveeditaddon' />
@@ -48,12 +52,19 @@
     <extension name='promotionengineatddtests' />
     <extension name='commercesearchatddtests' />
     <extension name='textfieldconfiguratortemplateatddtests' />
-	<extension dir="C:\Initiative\b2c\hybris\bin/custom/merchandise/merchandisefulfilmentprocess"/>
-    <extension dir="C:\Initiative\b2c\hybris\bin/custom/merchandise/merchandisecockpits"/>
-    <extension dir="C:\Initiative\b2c\hybris\bin/custom/merchandise/merchandisecore"/>
-    <extension dir="C:\Initiative\b2c\hybris\bin/custom/merchandise/merchandisefacades"/>
-    <extension dir="C:\Initiative\b2c\hybris\bin/custom/merchandise/merchandisetest"/>
-    <extension dir="C:\Initiative\b2c\hybris\bin/custom/merchandise/merchandisestorefront"/>
-    <extension dir="C:\Initiative\b2c\hybris\bin/custom/merchandise/merchandiseinitialdata"/>
-  </extensions>
+  
+
+
+
+<extension dir="${HYBRIS_BIN_DIR}/custom/merchandise/merchandisecore"/>
+     <extension dir="${HYBRIS_BIN_DIR}/custom/merchandise/merchandisefacades"/>
+     <extension dir="${HYBRIS_BIN_DIR}/custom/merchandise/merchandisetest"/>
+     <extension dir="${HYBRIS_BIN_DIR}/custom/merchandise/merchandisestorefront"/>
+     <extension dir="${HYBRIS_BIN_DIR}/custom/merchandise/merchandisefulfilmentprocess"/>
+     <extension dir="${HYBRIS_BIN_DIR}/custom/merchandise/merchandiseinitialdata"/>
+     <extension dir="${HYBRIS_BIN_DIR}/custom/merchandise/merchandisecockpits"/>
+
+
+
+</extensions>
 </hybrisconfig>
