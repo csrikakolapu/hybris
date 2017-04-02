@@ -7,7 +7,7 @@
 
 
 <c:forEach items="${actions}" var="action" varStatus="idx">
-<c:out value="${action.uid}"></c:out>
+
 	<c:if test="${action.visible}">
 		<${element} class="${parentComponent.uid}-${action.uid}" data-index="${idx.index + 1}" class="${styleClass}">
 			<cms:component component="${action}" parentComponent="${parentComponent}" evaluateRestriction="true"/>
