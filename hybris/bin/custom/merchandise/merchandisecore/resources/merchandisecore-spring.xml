@@ -523,12 +523,39 @@
 	</bean>
 	
 	<bean id="httpClient" class="org.apache.http.impl.client.DefaultHttpClient">
-		<constructor-arg>
+		<!-- <constructor-arg>
 			<bean class="org.apache.http.impl.conn.PoolingClientConnectionManager">
 				<constructor-arg ref="httpsSchemaRegistry" />
 				<property name="maxTotal" value="${httpconnection.maxTotal:20}" />
 				<property name="defaultMaxPerRoute" value="${httpconnection.defaultMaxPerRoute:2}" />
 			</bean>
-		</constructor-arg>
+		</constructor-arg> -->
 	</bean>
+	
+	<!-- <bean id="httpsSchemaRegistry" class="org.apache.http.conn.scheme.SchemeRegistry">
+		<property name="items">
+			<map>
+				<entry key="https">
+					<bean class="org.apache.http.conn.scheme.Scheme">
+						<constructor-arg value="https" />
+						<constructor-arg value="443" />
+						<constructor-arg ref="sslSocketFactory" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="sslSocketFactory" class="org.apache.http.conn.ssl.SSLSocketFactory">
+		<constructor-arg ref="truststore" />
+		<property name="hostnameVerifier" ref="hostnameVerifier" />
+	</bean>
+	
+	<bean id="hostnameVerifier" class="org.apache.http.conn.ssl.AllowAllHostnameVerifier" />
+	
+	<bean id="truststore"
+		class="org.springframework.ws.soap.security.support.KeyStoreFactoryBean">
+		<property name="location" value="classpath:order_simulation_keystore" />
+		<property name="password" value="${keystore.password}" />
+	</bean> -->
 </beans>
