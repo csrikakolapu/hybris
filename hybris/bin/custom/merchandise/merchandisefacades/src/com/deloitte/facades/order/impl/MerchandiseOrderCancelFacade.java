@@ -7,6 +7,7 @@ import de.hybris.merchandise.facades.order.data.OrderCancelResultData;
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.util.Config;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,11 +68,15 @@ public class MerchandiseOrderCancelFacade implements OrderCancelFacade
 
 
 		final OrderModel orderModel = orderCancelService.getOrderByCode(orderCode);
+		if (Config.getBoolean("sap.order.cancel", false))
+		{
+			orderCancelService.cancelOrderInSAP(orderModel);
+		}
+
 		orderModel.setStatus(OrderStatus.CANCELLED);
 		modelService.save(orderModel);
 		result.setOrderId(orderCode);
 		result.setSuccess(true);
-
 
 		return result;
 	}

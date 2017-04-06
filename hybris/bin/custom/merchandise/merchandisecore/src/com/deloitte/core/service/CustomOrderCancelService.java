@@ -16,5 +16,11 @@ public interface CustomOrderCancelService
 
 	public OrderModel getOrderByCode(String orderCode);
 
+	/**
+	 * @param order
+	 * @return
+	 */
+	boolean cancelOrderInSAP(OrderModel order);
+
 
 }
