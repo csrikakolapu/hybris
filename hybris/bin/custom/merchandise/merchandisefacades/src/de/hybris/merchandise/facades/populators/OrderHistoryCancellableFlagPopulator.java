@@ -26,6 +26,6 @@ public class OrderHistoryCancellableFlagPopulator implements Populator<OrderMode
 	private boolean isOrderCancellable(final OrderModel source)
 	{
 		final OrderStatus status = source.getStatus();
-		return status == OrderStatus.COMPLETED;
+		return status != OrderStatus.COMPLETED;
 	}
 }

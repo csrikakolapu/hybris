@@ -10,8 +10,9 @@ import java.util.List;
 
 import com.deloitte.core.dao.MerchandiseOrderDao;
 import com.deloitte.core.service.CustomOrderCancelService;
-import com.deloitte.sap.SI_CancelOrder_SyncServiceStub.DT_CancelOrderRequest;
-import com.deloitte.sap.SI_CancelOrder_SyncServiceStub.OrderDetail_type0;
+import com.deloitte.sap.SI_OrderCancellation_Out_SyncServiceStub.DT_OrderCancellation_Request;
+import com.deloitte.sap.SI_OrderCancellation_Out_SyncServiceStub.MT_OrderCancellation_Request;
+import com.deloitte.sap.SI_OrderCancellation_Out_SyncServiceStub.OrderDetail_type0;
 
 
 /**
@@ -68,7 +69,8 @@ public class MerchandiseOrderCancelService implements CustomOrderCancelService
 	@Override
 	public boolean cancelOrderInSAP(final OrderModel order)
 	{
-		final DT_CancelOrderRequest orderCancelRequest = new DT_CancelOrderRequest();
+		final MT_OrderCancellation_Request orderCancelRequest = new MT_OrderCancellation_Request();
+		final DT_OrderCancellation_Request dt_OrderCancel = new DT_OrderCancellation_Request();
 		final List<AbstractOrderEntryModel> entries = order.getEntries();
 		final OrderDetail_type0[] orderDetailArr = new OrderDetail_type0[entries.size()];
 		int index = 0;
@@ -84,9 +86,8 @@ public class MerchandiseOrderCancelService implements CustomOrderCancelService
 			orderDetail.setRejectionCode("R");
 		}
 
-
-
-		orderCancelRequest.setOrderDetail(orderDetailArr);
+		dt_OrderCancel.setOrderDetail(orderDetailArr);
+		orderCancelRequest.setMT_OrderCancellation_Request(dt_OrderCancel);
 		return true;
 	}
 

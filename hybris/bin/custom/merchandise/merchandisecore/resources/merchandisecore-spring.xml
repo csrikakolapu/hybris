@@ -505,8 +505,8 @@
 	
 	<bean id="messageFactorySAP" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>
 	<oxm:jaxb2-marshaller id="jaxbMarshallerSAP">
-		<oxm:class-to-be-bound name="com.deloitte.sap.SI_CancelOrder_SyncServiceStub.DT_CancelOrderRequest"/>
-		<oxm:class-to-be-bound name="com.deloitte.sap.SI_CancelOrder_SyncServiceStub.DT_CancelOrderResponse"/>
+		<oxm:class-to-be-bound name="com.deloitte.sap.SI_CancelOrder_SyncServiceStub.MT_OrderCancellation_Request"/>
+		<oxm:class-to-be-bound name="com.deloitte.sap.SI_CancelOrder_SyncServiceStub.MT_OrderCancellation_Response"/>
 	</oxm:jaxb2-marshaller>
 	
 	<bean id="sapMessageSender"
